@@ -9,24 +9,12 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
+	"github.com/klauern/adventcode-2018/helpers"
 )
-
-// MustScanFile will open a file that we know exists.  If there's a file open error,
-// it will panic.
-func MustScanFile(path string) *bufio.Scanner {
-	file, err := os.Open(path)
-	if err != nil {
-		panic(errors.WithStack(err))
-	}
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-	return scanner
-}
 
 // FrequencyCheck will calculate the overall sum of a list of numbers in a file.
 func FrequencyCheck(file string) int {
-	scanner := MustScanFile(file)
+	scanner := helpers.MustScanFile(file)
 	frequency := 0
 	for scanner.Scan() {
 		chg, err := strconv.Atoi(scanner.Text())
@@ -44,7 +32,7 @@ func FindDuplicateFreq(file string) int {
 	freqMap := map[int]bool{}
 	foundDuplicate := false
 	for !foundDuplicate {
-		scanner := MustScanFile(file)
+		scanner := helpers.MustScanFile(file)
 		for scanner.Scan() {
 			chg, err := strconv.Atoi(scanner.Text())
 			if err != nil {
