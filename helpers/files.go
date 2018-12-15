@@ -29,3 +29,5 @@ func ToArray(input *bufio.Scanner) []string {
 
 	return ary
 }
+
+func 
